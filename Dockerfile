@@ -46,7 +46,8 @@ RUN mkdir -p /home/node/.openclaw/workspace && \
 USER node
 
 # 安装飞书插件 - 使用 timeout 防止卡住，忽略错误继续构建
-RUN timeout 300 openclaw plugins install @m1heng-clawd/feishu || true
+# 已注释：OpenClaw 已内置飞书支持，不需要单独安装插件
+# RUN timeout 300 openclaw plugins install @m1heng-clawd/feishu || true
 
 # 安装钉钉插件 - 使用 timeout 防止卡住，忽略错误继续构建
 RUN timeout 300 openclaw plugins install https://github.com/soimy/clawdbot-channel-dingtalk.git || true
@@ -58,7 +59,8 @@ RUN cd /tmp && \
     timeout 300 openclaw plugins install . || true
 
 # 安装企业微信插件 - 使用 timeout 防止卡住，忽略错误继续构建
-RUN timeout 300 openclaw plugins install openclaw-plugin-wecom || true
+# 已注释：OpenClaw 已内置企业微信支持，不需要单独安装插件
+# RUN timeout 300 openclaw plugins install openclaw-plugin-wecom || true
 
 # 切换回 root 用户继续后续操作
 USER root

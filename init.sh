@@ -126,20 +126,17 @@ EOF
         FIRST_CHANNEL=false
     fi
 
-    # 添加飞书配置（如果提供了 APP_ID 和 APP_SECRET）
+    # 添加飞书配置（如果提供了 APP_ID 和 APP_SECRET）- 使用内置支持
     if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_APP_SECRET" ]; then
         if [ "$FIRST_CHANNEL" = false ]; then
             echo "," >> /home/node/.openclaw/openclaw.json
         fi
         cat >> /home/node/.openclaw/openclaw.json <<EOF
     "feishu": {
-      "enabled": true,
-      "connectionMode": "websocket",
-      "dmPolicy": "pairing",
-      "groupPolicy": "allowlist",
-      "requireMention": true,
       "appId": "$FEISHU_APP_ID",
-      "appSecret": "$FEISHU_APP_SECRET"
+      "appSecret": "$FEISHU_APP_SECRET",
+      "domain": "feishu",
+      "enabled": true
     }
 EOF
         FIRST_CHANNEL=false
@@ -226,18 +223,18 @@ EOF
         FIRST_PLUGIN=false
     fi
 
-    # 添加飞书插件配置（如果提供了 APP_ID 和 APP_SECRET）
-    if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_APP_SECRET" ]; then
-        if [ "$FIRST_PLUGIN" = false ]; then
-            echo "," >> /home/node/.openclaw/openclaw.json
-        fi
-        cat >> /home/node/.openclaw/openclaw.json <<EOF
-      "feishu": {
-        "enabled": true
-      }
-EOF
-        FIRST_PLUGIN=false
-    fi
+    # 飞书插件配置 - 已注释：使用内置支持，不需要插件
+    # if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_APP_SECRET" ]; then
+    #     if [ "$FIRST_PLUGIN" = false ]; then
+    #         echo "," >> /home/node/.openclaw/openclaw.json
+    #     fi
+    #     cat >> /home/node/.openclaw/openclaw.json <<EOF
+    #   "feishu": {
+    #     "enabled": true
+    #   }
+    # EOF
+    #     FIRST_PLUGIN=false
+    # fi
 
     # 添加钉钉插件配置（如果提供了 CLIENT_ID 和 CLIENT_SECRET）
     if [ -n "$DINGTALK_CLIENT_ID" ] && [ -n "$DINGTALK_CLIENT_SECRET" ]; then
@@ -265,17 +262,17 @@ EOF
         FIRST_PLUGIN=false
     fi
 
-    # 添加企业微信插件配置（如果提供了必需参数）
-    if [ -n "$WECOM_TOKEN" ] && [ -n "$WECOM_ENCODING_AES_KEY" ]; then
-        if [ "$FIRST_PLUGIN" = false ]; then
-            echo "," >> /home/node/.openclaw/openclaw.json
-        fi
-        cat >> /home/node/.openclaw/openclaw.json <<EOF
-      "openclaw-plugin-wecom": {
-        "enabled": true
-      }
-EOF
-    fi
+    # 企业微信插件配置 - 已注释：使用内置支持，不需要插件
+    # if [ -n "$WECOM_TOKEN" ] && [ -n "$WECOM_ENCODING_AES_KEY" ]; then
+    #     if [ "$FIRST_PLUGIN" = false ]; then
+    #         echo "," >> /home/node/.openclaw/openclaw.json
+    #     fi
+    #     cat >> /home/node/.openclaw/openclaw.json <<EOF
+    #   "openclaw-plugin-wecom": {
+    #     "enabled": true
+    #   }
+    # EOF
+    # fi
 
     # 关闭 entries 对象
     cat >> /home/node/.openclaw/openclaw.json <<EOF
@@ -283,19 +280,19 @@ EOF
     "installs": {
 EOF
 
-    # 添加飞书插件安装信息（如果提供了 APP_ID 和 APP_SECRET）
+    # 飞书插件安装信息 - 已注释：使用内置支持，不需要插件
     FIRST_INSTALL=true
-    if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_APP_SECRET" ]; then
-        cat >> /home/node/.openclaw/openclaw.json <<EOF
-      "feishu": {
-        "source": "npm",
-        "spec": "@m1heng-clawd/feishu",
-        "installPath": "/home/node/.openclaw/extensions/feishu",
-        "installedAt": "$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")"
-      }
-EOF
-        FIRST_INSTALL=false
-    fi
+    # if [ -n "$FEISHU_APP_ID" ] && [ -n "$FEISHU_APP_SECRET" ]; then
+    #     cat >> /home/node/.openclaw/openclaw.json <<EOF
+    #   "feishu": {
+    #     "source": "npm",
+    #     "spec": "@m1heng-clawd/feishu",
+    #     "installPath": "/home/node/.openclaw/extensions/feishu",
+    #     "installedAt": "$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")"
+    #   }
+    # EOF
+    #     FIRST_INSTALL=false
+    # fi
 
     # 添加钉钉插件安装信息（如果提供了 CLIENT_ID 和 CLIENT_SECRET）
     if [ -n "$DINGTALK_CLIENT_ID" ] && [ -n "$DINGTALK_CLIENT_SECRET" ]; then
@@ -329,20 +326,20 @@ EOF
         FIRST_INSTALL=false
     fi
 
-    # 添加企业微信插件安装信息（如果提供了必需参数）
-    if [ -n "$WECOM_TOKEN" ] && [ -n "$WECOM_ENCODING_AES_KEY" ]; then
-        if [ "$FIRST_INSTALL" = false ]; then
-            echo "," >> /home/node/.openclaw/openclaw.json
-        fi
-        cat >> /home/node/.openclaw/openclaw.json <<EOF
-      "openclaw-plugin-wecom": {
-        "source": "npm",
-        "spec": "https://github.com/sunnoy/openclaw-plugin-wecom.git",
-        "installPath": "/home/node/.openclaw/extensions/openclaw-plugin-wecom",
-        "installedAt": "$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")"
-      }
-EOF
-    fi
+    # 企业微信插件安装信息 - 已注释：使用内置支持，不需要插件
+    # if [ -n "$WECOM_TOKEN" ] && [ -n "$WECOM_ENCODING_AES_KEY" ]; then
+    #     if [ "$FIRST_INSTALL" = false ]; then
+    #         echo "," >> /home/node/.openclaw/openclaw.json
+    #     fi
+    #     cat >> /home/node/.openclaw/openclaw.json <<EOF
+    #   "openclaw-plugin-wecom": {
+    #     "source": "npm",
+    #     "spec": "https://github.com/sunnoy/openclaw-plugin-wecom.git",
+    #     "installPath": "/home/node/.openclaw/extensions/openclaw-plugin-wecom",
+    #     "installedAt": "$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")"
+    #   }
+    # EOF
+    # fi
 
     # 关闭 installs 和 plugins 对象
     cat >> /home/node/.openclaw/openclaw.json <<EOF
