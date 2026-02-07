@@ -1,0 +1,21 @@
+# 环境变量文件（包含敏感信息）
+.env
+
+# OpenClaw 数据目录
+.openclaw/
+
+# 系统文件
+.DS_Store
+*.swp
+*.swo
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# 日志文件
+*.log
+
+# Node
+node_modules/
