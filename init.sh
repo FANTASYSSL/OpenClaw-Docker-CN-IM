@@ -383,7 +383,7 @@ cleanup() {
 trap cleanup SIGTERM SIGINT SIGQUIT
 
 # 在后台启动 OpenClaw Gateway 作为子进程
-gosu node env HOME=/home/node openclaw gateway --verbose &
+env HOME=/home/node openclaw gateway --verbose &
 GATEWAY_PID=$!
 
 echo "=== OpenClaw Gateway 已启动 (PID: $GATEWAY_PID) ==="
