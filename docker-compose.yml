@@ -1,7 +1,10 @@
 services:
   openclaw-gateway:
     container_name: openclaw-gateway
-    image: ${OPENCLAW_IMAGE}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: openclaw-local:latest
     cap_add:
       - CHOWN
       - SETUID
