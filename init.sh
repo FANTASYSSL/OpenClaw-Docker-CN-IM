@@ -667,7 +667,7 @@ echo "允许插件列表已由系统自动同步"
 export BUN_INSTALL="/usr/local"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# 启动 OpenClaw Gateway（切换到 node 用户）
+# 启动 OpenClaw Gateway（保持 root 用户）
 echo "=== 启动 OpenClaw Gateway ==="
 
 export DBUS_SESSION_BUS_ADDRESS=/dev/null
@@ -687,7 +687,7 @@ cleanup() {
 trap cleanup SIGTERM SIGINT SIGQUIT
 
 # 启动网关
-gosu node env HOME=/home/node DBUS_SESSION_BUS_ADDRESS=/dev/null \
+env HOME=/home/node DBUS_SESSION_BUS_ADDRESS=/dev/null \
     BUN_INSTALL="/usr/local" PATH="/usr/local/bin:$PATH" \
     openclaw gateway run \
     --bind "$OPENCLAW_GATEWAY_BIND" \

@@ -355,6 +355,7 @@ docker compose up -d
   - 打印挂载目录当前 UID/GID 与目标 UID/GID
   - 尝试自动修复 `/home/node/.openclaw` 权限
   - 若仍不可写，输出明确的修复命令并失败退出，避免“有时成功有时报错”的隐性状态
+  - 保持以 root 用户运行 OpenClaw Gateway
 ---
 
 ## 注意事项
